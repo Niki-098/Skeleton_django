@@ -27,3 +27,7 @@ class CustomUserCreationForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+class CustomUserLoginForm(forms.Form):
+    name = forms.CharField(label='Name',max_length=255)
+    password = forms.CharField(label='Password',widget=forms.PasswordInput)

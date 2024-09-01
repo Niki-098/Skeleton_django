@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.utils import timezone
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, name, password=None, **extra_fields):
@@ -20,7 +21,7 @@ class CustomUser(AbstractBaseUser):
     last_login = models.DateTimeField(null=True, blank=True)
     name = models.CharField(max_length=255, unique=True, null=False)
     email = models.EmailField(unique=True, null=False)
-    date_joined = models.DateTimeField(auto_now_add=True)
+    date_joined = models.DateTimeField(default=timezone.now)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name']
